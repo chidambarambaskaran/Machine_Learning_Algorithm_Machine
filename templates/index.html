@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: var(--container-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #fileInput {
+            display: block;
+            margin: 20px auto;
+        }
+
+        .algorithm-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .algorithm-section {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            width: 48%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: var(--container-bg); /* Ensure background color matches the theme */
+            color: var(--text-color); /* Ensure text color matches the theme */
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Dark mode toggle */
+        .toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+        }
+
+        .toggle input {
+            display: none;
+        }
+
+        .toggle label {
+            display: block;
+            width: 60px;
+            height: 30px;
+            background: #ccc;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .toggle label:after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #fff;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 3px;
+            transition: 0.2s;
+        }
+
+        .toggle input:checked + label {
+            background: #007bff;
+        }
+
+        .toggle input:checked + label:after {
+            left: calc(100% - 3px);
+            transform: translateY(-50%);
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1e1e1e;
+        }
+
+        body.light {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --container-bg: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body class="light"> <!-- Set initial class to light -->
+    <div class="container">
+        <h1>Model Evaluation</h1>
+        <input type="file" id="fileInput" onchange="uploadFile()">
+        <div id="outputArea"></div>
+        <p>Please upload a dataset with target variables in the last column and features in the remaining columns for optimal prediction.</p>
+        <div class="algorithm-container">
+            <div class="algorithm-section classification-section">
+                <h2>Classification Algorithms</h2>
+                <div class="button-container">
+                    <button class="button" onclick="evaluateClassification('Logistic Regression')">Logistic Regression</button>
+                    <button class="button" onclick="evaluateClassification('Random Forest Classifier')">Random Forest</button>
+                    <button class="button" onclick="evaluateClassification('Support Vector Classifier')">Support Vector Machine</button>
+                    <button class="button" onclick="evaluateClassification('Gradient Boosting Classifier')">Gradient Boosting</button>
+                    <button class="button" onclick="evaluateClassification('Decision Tree Classifier')">Decision Tree</button>
+                </div>
+                <div id="classification-result" class="result"></div>
+            </div>
+            <div class="algorithm-section regression-section">
+                <h2>Regression Algorithms</h2>
+                <div class="button-container">
+                    <button class="button" onclick="evaluateRegression('Linear Regression')">Linear Regression</button>
+                    <button class="button" onclick="evaluateRegression('Random Forest Regressor')">Random Forest</button>
+                    <button class="button" onclick="evaluateRegression('Support Vector Regressor')">Support Vector Machine</button>
+                    <button class="button" onclick="evaluateRegression('Gradient Boosting Regressor')">Gradient Boosting</button>
+                    <button class="button" onclick="evaluateRegression('Decision Tree Regressor')">Decision Tree</button>
+                </div>
+                <div id="regression-result" class="result"></div>
+            </div>
+        </div>
+    </div>
+    <div class="toggle">
+        <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+        <label for="themeToggle"></label>
+    </div>
+    <footer>Developed by <b>Chidambaram</b></footer>
+    <script src="static/script.js"></script>
+</body>
+
+</html>
