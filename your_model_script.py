@@ -13,8 +13,8 @@ from sklearn.metrics import accuracy_score, mean_squared_error
 import joblib
 
 def preprocess_data(df, task='classification', test_size=0.2, random_state=42):
-    X = df.iloc[:, :-1]  # Features are all columns except the last one
-    y = df.iloc[:, -1]   # Target is the last column
+    X = df.iloc[:, :-1]  
+    y = df.iloc[:, -1]
     
     categorical_cols = X.select_dtypes(include=['object', 'category']).columns
     numerical_cols = X.select_dtypes(include=['int64', 'float64']).columns
@@ -84,10 +84,8 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test, task='classifica
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         
-        # Define a threshold for accuracy calculation
-        threshold = 0.1  # Define your own threshold as needed
+        threshold = 0.1 
         
-        # Calculate accuracy within the threshold
         correct_predictions = np.abs(y_test - y_pred) <= threshold * np.abs(y_test)
         accuracy = np.mean(correct_predictions)
         

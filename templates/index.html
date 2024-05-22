@@ -19,6 +19,10 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        p{
+            text-align: center;
+        }
+
         .container {
             width: 90%;
             max-width: 1200px;
@@ -73,8 +77,8 @@
         .result {
             margin-top: 10px;
             padding: 10px;
-            background-color: var(--container-bg); /* Ensure background color matches the theme */
-            color: var(--text-color); /* Ensure text color matches the theme */
+            background-color: var(--container-bg); 
+            color: var(--text-color); 
             border-radius: 5px;
             text-align: center;
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -90,7 +94,6 @@
             }
         }
 
-        /* Dark mode toggle */
         .toggle {
             position: fixed;
             top: 10px;
@@ -133,8 +136,6 @@
             left: calc(100% - 3px);
             transform: translateY(-50%);
         }
-
-        /* Dark mode styles */
         body.dark {
             --bg-color: #121212;
             --text-color: #e0e0e0;
@@ -159,12 +160,12 @@
     </style>
 </head>
 
-<body class="light"> <!-- Set initial class to light -->
+<body class="light"> 
     <div class="container">
-        <h1>Model Evaluation</h1>
+        <h1>Machine Learning Algorithms Evaluation</h1>
         <input type="file" id="fileInput" onchange="uploadFile()">
         <div id="outputArea"></div>
-        <p>Please upload a dataset with target variables in the last column and features in the remaining columns for optimal prediction.</p>
+        <p>Note: Please upload a dataset with target variables in the last column and features in the remaining columns for optimal prediction.</p>
         <div class="algorithm-container">
             <div class="algorithm-section classification-section">
                 <h2>Classification Algorithms</h2>

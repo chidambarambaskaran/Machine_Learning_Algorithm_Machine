@@ -10,7 +10,6 @@ function toggleTheme() {
     }
 }
 
-// Ensure the theme matches the toggle on page load
 document.addEventListener('DOMContentLoaded', (event) => {
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle.checked) {
