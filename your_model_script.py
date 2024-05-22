@@ -37,28 +37,28 @@ def preprocess_data(df, task='classification', test_size=0.2, random_state=42):
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
     
-    X_train = preprocessor.fit_transform(X_train)
-    X_test = preprocessor.transform(X_test)
-    
     if task == 'classification' and y_train.dtype == 'object':
         le = LabelEncoder()
         y_train = le.fit_transform(y_train)
         y_test = le.transform(y_test)
+    
+    X_train = preprocessor.fit_transform(X_train)
+    X_test = preprocessor.transform(X_test)
     
     return X_train, X_test, y_train, y_test, preprocessor
 
 def train_and_evaluate_models(X_train, X_test, y_train, y_test, task='classification', algorithm='Logistic Regression'):
     if task == 'classification':
         if algorithm == 'Logistic Regression':
-            model = LogisticRegression(max_iter=1000)
+            model = LogisticRegression(max_iter=1000, random_state=42)
         elif algorithm == 'Random Forest Classifier':
-            model = RandomForestClassifier(random_state=42)
+            model = RandomForestClassifier(n_estimators=100, max_depth=10, min_samples_leaf=2, random_state=42)
         elif algorithm == 'Support Vector Classifier':
-            model = SVC()
+            model = SVC(C=1.0, kernel='rbf', random_state=42)
         elif algorithm == 'Gradient Boosting Classifier':
-            model = GradientBoostingClassifier(random_state=42)
+            model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
         elif algorithm == 'Decision Tree Classifier':
-            model = DecisionTreeClassifier(random_state=42)
+            model = DecisionTreeClassifier(max_depth=5, random_state=42)
         else:
             return None, None
         
@@ -71,13 +71,13 @@ def train_and_evaluate_models(X_train, X_test, y_train, y_test, task='classifica
         if algorithm == 'Linear Regression':
             model = LinearRegression()
         elif algorithm == 'Random Forest Regressor':
-            model = RandomForestRegressor(random_state=42)
+            model = RandomForestRegressor(n_estimators=100, max_depth=10, min_samples_leaf=2, random_state=42)
         elif algorithm == 'Support Vector Regressor':
-            model = SVR()
+            model = SVR(C=1.0, kernel='rbf')
         elif algorithm == 'Gradient Boosting Regressor':
-            model = GradientBoostingRegressor(random_state=42)
+            model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
         elif algorithm == 'Decision Tree Regressor':
-            model = DecisionTreeRegressor(random_state=42)
+            model = DecisionTreeRegressor(max_depth=5, random_state=42)
         else:
             return None, None
         
